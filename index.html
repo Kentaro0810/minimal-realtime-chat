@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <title>リアルタイムチャット</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><p class="eyebrow">MINIMAL CHAT</p><h1>リアルタイムチャット</h1></div>
+      <button id="signOutBtn" class="ghost hidden" type="button">ログアウト</button>
+    </header>
+
+    <section id="setupView" class="card hidden">
+      <h2>初回設定</h2>
+      <p>Supabaseの「Project URL」と「Publishable key」を入力してください。設定はこのブラウザ内だけに保存されます。</p>
+      <form id="setupForm" class="stack">
+        <label>Project URL<input id="projectUrl" type="url" placeholder="https://xxxxx.supabase.co" required></label>
+        <label>Publishable key<input id="anonKey" type="password" placeholder="sb_publishable_... または anon key" required></label>
+        <button class="primary" type="submit">設定を保存</button>
+      </form>
+      <button id="clearConfigBtn" class="text-button" type="button">保存済み設定を消去</button>
+    </section>
+
+    <section id="authView" class="card hidden">
+      <div class="tabs" role="tablist">
+        <button id="loginTab" class="tab active" type="button">ログイン</button>
+        <button id="signupTab" class="tab" type="button">新規登録</button>
+      </div>
+      <form id="authForm" class="stack">
+        <label id="nameLabel" class="hidden">表示名<input id="displayName" maxlength="30" autocomplete="nickname"></label>
+        <label>メールアドレス<input id="email" type="email" autocomplete="email" required></label>
+        <label>パスワード<input id="password" type="password" minlength="6" autocomplete="current-password" required></label>
+        <button id="authSubmit" class="primary" type="submit">ログイン</button>
+      </form>
+      <p id="authMessage" class="message" aria-live="polite"></p>
+      <button id="showSetupBtn" class="text-button" type="button">接続設定を変更</button>
+    </section>
+
+    <section id="chatView" class="chat hidden">
+      <div class="room-head">
+        <div><span class="dot"></span><strong>みんなの部屋</strong></div>
+        <span id="userLabel" class="user-label"></span>
+      </div>
+      <ol id="messages" class="messages" aria-live="polite"></ol>
+      <form id="messageForm" class="composer">
+        <label class="sr-only" for="messageInput">メッセージ</label>
+        <textarea id="messageInput" maxlength="500" rows="1" placeholder="メッセージを入力" required></textarea>
+        <button class="send" type="submit" aria-label="送信">送信</button>
+      </form>
+      <p id="chatMessage" class="message" aria-live="polite"></p>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
